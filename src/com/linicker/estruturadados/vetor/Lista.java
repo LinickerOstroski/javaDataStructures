@@ -1,16 +1,18 @@
 package com.linicker.estruturadados.vetor;
 
-public class Vetor {
+import java.lang.reflect.Array;
+
+public class Lista<T> {
 	
-	private String[] elementos;
+	private T[] elementos;
 	private int tamanho;
 	
-	public Vetor(int capacidade) {
-		this.elementos = new String[capacidade];
+	public Lista(int capacidade) {
+		this.elementos =(T[]) new Object[capacidade];
 		this.tamanho = 0;
 	}
 	
-	public boolean adiciona(String elemento) {
+	public boolean adiciona(T elemento) {
 		this.aumentaCapacidade();
 		
 		if(this.tamanho < this.elementos.length) {
@@ -22,7 +24,7 @@ public class Vetor {
 		}
 	}
 	
-	public boolean adiciona(int posicao, String elemento) {
+	public boolean adiciona(int posicao, T elemento) {
 		
 		if(!(posicao >= 0 && posicao < tamanho)){
 			throw new IllegalArgumentException("Posição inválida");
@@ -42,7 +44,7 @@ public class Vetor {
 	
 	private void aumentaCapacidade() {
 		if(this.tamanho == this.elementos.length) {
-			String[] elementosNovos = new String[this.elementos.length * 2];
+			T[] elementosNovos = (T[]) new Object[this.elementos.length * 2];
 			for(int i = 0; i < this.elementos.length; i++) {
 				elementosNovos[i] = this.elementos[i];
 			}
@@ -50,14 +52,14 @@ public class Vetor {
 		}
 	}
 	
-	public String busca(int posicao) {
+	public T busca(int posicao) {
 		if(!(posicao >= 0 && posicao < tamanho)){
 			throw new IllegalArgumentException("Posição inválida");
 		}
 		return this.elementos[posicao];
 	}
 	
-	public int busca(String elemento) {
+	public int busca(T elemento) {
 		for(int i = 0; i < this.tamanho; i++) {
 			if(this.elementos[i].equals(elemento)) {
 				return i;
@@ -80,7 +82,7 @@ public class Vetor {
 	public int tamanho() {
 		return this.tamanho;
 	}
-	
+
 	public String toString() {
 		
 		StringBuilder s = new StringBuilder();
